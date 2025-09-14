@@ -1,0 +1,509 @@
+/* =========================================
+   HERO – layout original + effets responsive AMÉLIORÉ
+   ========================================= */
+
+/* Serif display pour le H1 */
+@import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
+
+/* Motif halftone pour les capsules (data-URI) */
+:root{
+  --halftone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 10 10'%3E%3Cdefs%3E%3Cpattern id='d' width='1' height='1' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='0.5' cy='0.5' r='0.18' fill='%23000'/%3E%3C/pattern%3E%3CradialGradient id='v' cx='50%25' cy='50%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='white' stop-opacity='0.9'/%3E%3Cstop offset='100%25' stop-color='white' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='10' height='10' fill='url(%23d)'/%3E%3Crect width='10' height='10' fill='url(%23v)'/%3E%3C/svg%3E");
+}
+
+/* =============== Containers =============== */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-container{
+  width: 100%;
+  max-width: 1200px;
+   padding: 0 2rem 0 12rem; /* Plus de padding à gauche qu'à droite */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+/* =============== Colonne gauche - décalée et montée =============== */
+.hero-main{
+  position: relative;
+  transform: translateX(-6rem) translateY(-3rem);
+}
+
+.hero-title{
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 800;
+  line-height: 0.9;
+  margin: 0;
+  position: relative;
+  font-family: 'Gloock', serif;
+}
+
+.title-word{
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #f5f5dc 0%, #e8e8d0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+  z-index: 2;
+}
+
+/* Capsules "verre + halftone" avec positionnement responsive */
+.blur-capsule{
+  position: absolute;
+  z-index: 3;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(15,15,15,0.25);
+  box-shadow:
+    0 2px 14px rgba(0,0,0,0.38),
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 -10px 14px rgba(0,0,0,0.35);
+  overflow: hidden;
+  backdrop-filter: blur(3px) contrast(1.03) saturate(0.95);
+  -webkit-backdrop-filter: blur(3px) contrast(1.03) saturate(0.95);
+}
+.blur-capsule::after{
+  content:"";
+  position:absolute; inset:0;
+  background-image: var(--halftone);
+  background-size: 22px 22px;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  opacity: .55;
+  filter: contrast(1.25) brightness(0.85);
+}
+.blur-capsule::before{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit;
+  background: linear-gradient(to bottom, rgba(255,255,255,.25), rgba(255,255,255,0) 40%);
+  mix-blend-mode: screen; opacity:.35;
+}
+
+/* Fallback si pas de backdrop-filter */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+  .blur-capsule{
+    background: rgba(30,30,30,.55);
+    box-shadow:
+      0 2px 10px rgba(0,0,0,.35),
+      inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+  .blur-capsule::after{ opacity:.35; }
+}
+
+/* Positions des capsules - RESPONSIVE avec unités relatives */
+.blur-capsule-1{ 
+  bottom: -0.5em;
+  left: 0.3em;
+  width: 2.1em; 
+  height: 1.05em;
+  /* Référence: font-size du titre pour s'adapter à sa taille */
+}
+.blur-capsule-2{ 
+  top: -0.4em;
+  right: -0.6em;
+  width: 1.8em; 
+  height: 0.9em;
+}
+
+/* =============== Name tag - AGRANDI et positionnement responsive =============== */
+.name-section{
+  position: absolute;
+  bottom: -0.5em; /* Légèrement plus bas pour l'équilibrage */
+  right: 6%;
+  display: flex; 
+  align-items: center; 
+  gap: 0.3em; /* Gap légèrement augmenté */
+  z-index: 4;
+  /* TAILLE AUGMENTÉE - passé de 0.15em à 0.22em */
+  font-size: 0.22em; /* Hérité du titre - maintenant plus visible */
+}
+.filled-circle{
+  width: 1.2em; 
+  height: 1.2em; 
+  border-radius: 50%;
+  background: #f5f5dc;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+.hero-subtitle{
+  padding: 0.67em 1.07em;
+  border-radius: 999px;
+  background: #f5f5dc;
+  color: #1a1a1a;
+  font: 600 3em/1 var(--font-body, 'Inter', sans-serif);
+  letter-spacing: .02em;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.30);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.15);
+  /* Amélioration responsive */
+  white-space: nowrap; /* Empêche le retour à la ligne */
+  min-width: fit-content; /* S'assure que le texte ne se compresse pas */
+}
+
+/* =============== Colonne droite - descendue pour équilibrer =============== */
+.hero-footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(3rem);
+}
+.hero-about h2{
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f5f5dc;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: .05em;
+}
+.hero-about p{
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #d0d0d0;
+  margin: 0 0 2rem 0;
+  max-width: 400px;
+}
+.hero-actions{
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.btn-primary, .btn-secondary{
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .05em;
+  transition: all .3s ease;
+  border: 1px solid transparent;
+  /* Amélioration responsive */
+  text-align: center;
+  min-width: fit-content;
+}
+.btn-primary{ 
+  background:#f5f5dc; 
+  color:#1a1a1a; 
+  border-color:#f5f5dc; 
+}
+.btn-primary:hover{ 
+  background:transparent; 
+  color:#f5f5dc; 
+  border-color:#f5f5dc;
+  transform: translateY(-2px);
+}
+.btn-secondary{ 
+  background:transparent; 
+  color:#f5f5dc; 
+  border-color:#f5f5dc; 
+}
+.btn-secondary:hover{ 
+  background:#f5f5dc; 
+  color:#1a1a1a;
+  transform: translateY(-2px);
+}
+
+/* =============== Header (2025) - positionnement responsive =============== */
+.hero-header{
+  position: absolute;   
+  top: -40%; /* Pourcentage relatif au container */
+  left: -5%; /* Pourcentage relatif au container */
+  display: flex; 
+  align-items: center; 
+  gap: 2rem;
+  z-index: 3;
+}
+.year-section{ 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+.empty-circle{
+  width: 24px; 
+  height: 24px; 
+  border-radius: 50%;
+  border: 1.6px solid rgba(245,245,220,.85);
+  background: transparent;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+.year-badge{
+  position: relative;
+  padding: 6px 16px;
+  border-radius: 999px;
+  color: #f5f5dc;
+  border: 1.6px solid rgba(245,245,220,.85);
+  font: 600 14px/1 var(--font-body, 'Inter', sans-serif);
+  font-style: italic;
+  letter-spacing: .06em;
+  background: transparent;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+  white-space: nowrap; /* Empêche le retour à la ligne */
+}
+.year-badge::before{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  pointer-events:none;
+}
+.year-badge::after{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  background: linear-gradient(to bottom, rgba(255,255,255,.12), rgba(255,255,255,0) 45%);
+  mix-blend-mode: screen; opacity:.35; pointer-events:none;
+}
+
+/* =============== Responsive breakpoints AMÉLIORÉS =============== */
+
+/* Très grand écran */
+@media (min-width: 1400px) {
+  .hero-container {
+    max-width: 1400px;
+  }
+  
+  .name-section {
+    font-size: 0.25em; /* Encore plus grand sur très grands écrans */
+  }
+}
+
+/* Grande tablette */
+@media (max-width: 1200px) {
+  .hero-main {
+    transform: translateX(-4rem) translateY(-2rem);
+  }
+  
+  .hero-footer {
+    transform: translateY(2rem);
+  }
+  
+  .hero-header {
+    top: -20%;
+    left: -12%;
+  }
+  
+  .blur-capsule-1 {
+    width: 1.9em;
+    height: 0.95em;
+  }
+  
+  .blur-capsule-2 {
+    width: 1.6em;
+    height: 0.8em;
+  }
+  
+  .name-section {
+    font-size: 0.20em; /* Légère réduction mais toujours lisible */
+  }
+}
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .hero-main {
+    transform: translateX(-3rem) translateY(-1.5rem);
+  }
+  
+  .hero-footer {
+    transform: translateY(1.5rem);
+  }
+  
+  .hero-header {
+    top: -15%;
+    left: -10%;
+    gap: 1.5rem;
+  }
+  
+  .name-section {
+    font-size: 0.19em;
+  }
+  
+  .hero-about h2 {
+    font-size: 1.8rem;
+  }
+  
+  .hero-about p {
+    font-size: 1.05rem;
+  }
+}
+
+/* Transition vers mobile */
+@media (max-width: 900px) {
+  .hero-container { 
+    grid-template-columns: 1fr; 
+    gap: 3rem; /* Gap légèrement augmenté */
+    text-align: center;
+  }
+  
+  .hero-main { 
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-footer { 
+    transform: none; 
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .hero-header {
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .name-section { 
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 1.5rem; /* Marge augmentée */
+    justify-content: center;
+    font-size: 0.18em; /* Taille adaptée pour mobile */
+  }
+  
+  /* Ajuster les capsules pour mobile */
+  .blur-capsule-1 {
+    bottom: -0.3em;
+    left: 0.2em;
+    width: 1.8em;
+    height: 0.9em;
+  }
+  
+  .blur-capsule-2 {
+    top: -0.2em;
+    right: -0.4em;
+    width: 1.5em;
+    height: 0.75em;
+  }
+  
+  .hero-actions {
+    gap: 1.2rem;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 600px) {
+  .hero-container {
+    padding: 0 1rem;
+    gap: 2.5rem;
+  }
+  
+  .hero-title {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+  
+  .hero-about h2 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-about p {
+    font-size: 1rem;
+    max-width: 100%; /* Permet d'utiliser toute la largeur */
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.8rem;
+    min-width: 120px; /* Largeur minimale pour éviter les boutons trop étroits */
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .name-section {
+    font-size: 0.16em;
+  }
+  
+  /* Réduire les capsules sur très petits écrans */
+  .blur-capsule-1,
+  .blur-capsule-2 {
+    width: 1.4em;
+    height: 0.7em;
+  }
+}
+
+/* Très petit mobile */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: clamp(2rem, 15vw, 3rem);
+  }
+  
+  .year-badge {
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+  
+  .empty-circle {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .hero-subtitle {
+    font-size: 13px;
+    padding: 0.5em 0.8em; /* Padding réduit pour très petits écrans */
+  }
+  
+  .name-section {
+    font-size: 0.14em;
+    gap: 0.2em;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Optimisations pour écrans très larges (ultrawide) */
+@media (min-width: 1600px) {
+  .hero-container {
+    max-width: 1600px;
+  }
+  
+  .hero-main {
+    transform: translateX(-8rem) translateY(-4rem);
+  }
+  
+  .hero-footer {
+    transform: translateY(4rem);
+  }
+}
+
+/* Mode paysage mobile - ajustements spécifiques */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  
+  .hero-container {
+    gap: 2rem;
+  }
+  
+  .hero-main {
+    transform: translateX(-2rem) translateY(-1rem);
+  }
+  
+  .hero-footer {
+    transform: translateY(1rem);
+  }
+  
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 4rem);
+  }
+}

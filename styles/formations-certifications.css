@@ -1,0 +1,753 @@
+/* ========================================
+   FORMATIONS & CERTIFICATIONS - VERSION RESPONSIVE OPTIMISÉE
+   ======================================== */
+
+/* Variables responsive */
+:root {
+  --formations-offset: -6rem;
+  --certifications-offset-x: -2rem;
+  --certifications-offset-y: 6rem;
+  --divider-offset: -4rem;
+}
+
+/* ========================================
+   SECTION FUSIONNÉE - BASE
+   ======================================== */
+
+.formations-certifications-fusion {
+    position: relative;
+    padding: 6rem 0 8rem 0;
+    background: 
+        radial-gradient(circle at 15% 25%, rgba(245, 245, 220, 0.008) 0%, transparent 35%),
+        radial-gradient(circle at 85% 75%, rgba(212, 184, 150, 0.005) 0%, transparent 40%);
+    overflow: hidden;
+}
+
+.fusion-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1px 0.5fr;
+    gap: 3rem;
+    align-items: start;
+    min-height: 80vh;
+}
+
+/* ========================================
+   TRAIT DE SÉPARATION
+   ======================================== */
+
+.fusion-divider {
+    position: relative;
+    justify-self: center;
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(var(--divider-offset));
+}
+
+.divider-circle-top,
+.divider-circle-bottom {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4b896 0%, #f5f5dc 100%);
+    box-shadow: 0 0 15px rgba(212, 184, 150, 0.3);
+}
+
+.divider-line {
+    flex: 1;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 1rem 0;
+    opacity: 1;
+    animation: lineAppear 1.5s ease-out 1s forwards;
+}
+
+@keyframes lineAppear {
+    to { opacity: 1; }
+}
+
+/* ========================================
+   FORMATIONS - CÔTÉ GAUCHE
+   ======================================== */
+
+.formations-side {
+    width: 100%;
+    transform: translateX(var(--formations-offset));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.formations-side .formations-title {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin-bottom: 2.5rem !important;
+    font-size: clamp(3rem, 5vw, 5rem) !important;
+    text-align: left !important;
+    transform: none !important;
+    width: auto !important;
+    align-self: flex-start !important;
+    font-family: 'Gloock', serif;
+    font-weight: 800;
+    color: transparent;
+    background: linear-gradient(135deg, #f5f5dc 0%, #e8e5e0 50%, #d4b896 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+.formations-side .formations-timeline {
+    padding: 0 !important;
+    min-height: auto !important;
+}
+
+.formations-side .formations-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    gap: clamp(0.8rem, 2vw, 1.2rem) !important;
+    max-width: none !important;
+    padding: 0 !important;
+    width: auto !important;
+    margin: 0 !important;
+    align-self: flex-start !important;
+}
+
+.formations-side .formation-card {
+    flex: none !important;
+    width: clamp(240px, 18vw, 280px) !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    min-height: clamp(200px, 15vw, 240px) !important;
+    aspect-ratio: 1.1/1 !important;
+    padding: clamp(1.2rem, 2vw, 2rem) clamp(1rem, 1.5vw, 1.5rem) !important;
+    border-radius: 16px !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(245, 243, 240, 0.12);
+    background: rgba(26, 26, 26, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* Animations décalées avec couleurs debug */
+.formations-container .formation-card:nth-child(1) { 
+  animation: cardAppear 0.8s ease-out 1s forwards;
+  background: rgba(255, 0, 0, 0.1);
+}
+.formations-container .formation-card:nth-child(2) { 
+  animation: cardAppear 0.8s ease-out 1.4s forwards;
+  background: rgba(0, 255, 0, 0.1);
+}
+.formations-container .formation-card:nth-child(3) { 
+  animation: cardAppear 0.8s ease-out 1.8s forwards;
+  background: rgba(0, 0, 255, 0.1);
+}
+
+@keyframes cardAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contenu des cartes formations */
+.formation-year {
+    font-family: 'Gloock', serif;
+    font-size: clamp(1.4rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-accent-primary, #d4b896);
+    line-height: 0.9;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.formation-status {
+    font-family: var(--font-mono, monospace);
+    font-size: clamp(0.6rem, 1vw, 0.75rem);
+    color: var(--color-grey, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.formation-title {
+    font-family: var(--font-heading, sans-serif);
+    font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+    font-weight: 700;
+    color: var(--color-cream, #f5f5dc);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+}
+
+.formation-subtitle {
+    font-family: var(--font-body, sans-serif);
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    color: var(--color-grey-warm, #aaa);
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+/* États spéciaux formations */
+.formation-card.current {
+    border-color: rgba(212, 184, 150, 0.4);
+    box-shadow: 0 0 40px rgba(212, 184, 150, 0.15);
+}
+
+.formation-card.current .formation-status {
+    color: var(--color-accent-primary, #d4b896);
+    font-weight: 600;
+}
+
+.formation-card.current .formation-year {
+    background: linear-gradient(135deg, #f5f5dc 0%, #d4b896 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.formation-card.obtained .formation-status::after {
+    content: ' ✓';
+    color: var(--color-accent-secondary, #90EE90);
+    font-style: normal;
+}
+
+/* Hover formations - seulement sur desktop */
+@media (hover: hover) {
+    .formation-card:hover {
+        transform: translateY(-8px) scale(1.02) !important;
+        border-color: rgba(212, 184, 150, 0.4) !important;
+        box-shadow: 
+            0 20px 60px rgba(212, 184, 150, 0.15),
+            0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    }
+}
+
+/* ========================================
+   CERTIFICATIONS - CÔTÉ DROIT
+   ======================================== */
+
+.certifications-side {
+    width: 100%;
+    transform: translate(var(--certifications-offset-x), var(--certifications-offset-y));
+    overflow: visible !important;
+    min-height: 450px !important;
+}
+
+.certifications-side .certifications-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.certifications-side .certifications-title {
+    font-family: 'Gloock', serif;
+    font-size: clamp(3rem, 5vw, 5rem) !important;
+    font-weight: 800;
+    color: var(--color-cream, #f5f5dc);
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+.certifications-side .certifications-subtitle {
+    font-family: var(--font-body, sans-serif);
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    color: var(--color-grey, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: 500;
+    text-align: center !important;
+    margin-bottom: 2.5rem !important;
+    opacity: 0.8;
+}
+
+.certifications-side .certifications-collection {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: clamp(1rem, 2vw, 2rem) !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    overflow: visible !important;
+    min-height: 420px !important;
+}
+
+.certifications-side .certification-badge {
+    flex: 1 !important;
+    max-width: none !important;
+    width: auto !important;
+    min-width: 0 !important;
+    aspect-ratio: 0.7/1.4 !important;
+    padding: clamp(1.5rem, 3vw, 3rem) clamp(1.2rem, 2.5vw, 2.5rem) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: space-between !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(16, 16, 16, 0.99) 100%);
+    border: 2px solid rgba(245, 245, 220, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Animations certifications */
+.cert-01 { animation: stampAppear 0.8s ease-out 0.3s forwards; }
+.cert-02 { animation: stampAppear 0.8s ease-out 0.6s forwards; }
+.cert-03 { animation: stampAppear 0.8s ease-out 0.9s forwards; }
+
+@keyframes stampAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Filigrane certifications */
+.certification-badge::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    font-family: 'Gloock', serif;
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 800;
+    color: rgba(245, 245, 220, 0.03);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cert-01::before { content: '01'; }
+.cert-02::before { content: '02'; }
+.cert-03::before { content: '03'; }
+
+/* Contenu certifications */
+.certifications-side .badge-number {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: clamp(24px, 3vw, 30px);
+    height: clamp(24px, 3vw, 30px);
+    background: rgba(245, 245, 220, 0.1);
+    border: 2px solid rgba(245, 245, 220, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.6rem, 1vw, 0.75rem);
+    font-weight: 800;
+    color: var(--color-cream, #f5f5dc);
+    z-index: 3;
+}
+
+.certifications-side .badge-content {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: clamp(0.8rem, 1.5vw, 1rem) !important;
+    flex-grow: 1 !important;
+    justify-content: center !important;
+    position: relative;
+    z-index: 2;
+}
+
+.certifications-side .cert-icon {
+    flex-shrink: 0 !important;
+    margin-bottom: 1rem !important;
+    width: clamp(45px, 6vw, 55px) !important;
+    height: clamp(45px, 6vw, 55px) !important;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(245, 245, 220, 0.2) 0%, rgba(245, 245, 220, 0.1) 100%);
+    border: 2px solid rgba(245, 245, 220, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.cert-seal {
+    font-family: 'Gloock', serif;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-weight: 800;
+    color: var(--color-cream, #f5f5dc);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.certifications-side .cert-name {
+    font-family: 'Gloock', serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem) !important;
+    font-weight: 800;
+    color: var(--color-cream, #f5f5dc);
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.8rem !important;
+    text-align: center !important;
+}
+
+.certifications-side .cert-org {
+    font-family: var(--font-body, sans-serif);
+    font-size: clamp(0.65rem, 1vw, 0.75rem) !important;
+    color: var(--color-grey, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    margin-bottom: 1.2rem !important;
+    opacity: 0.8;
+}
+
+.certifications-side .cert-meta {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: clamp(0.8rem, 1.5vw, 1rem) !important;
+    margin-top: auto !important;
+    padding-top: 1rem !important;
+    position: relative;
+    z-index: 2;
+}
+
+.certifications-side .cert-date {
+    font-family: 'Gloock', serif;
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem) !important;
+    color: var(--color-accent-primary, #d4b896);
+    font-weight: 600;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.certifications-side .cert-status {
+    position: relative;
+    padding: clamp(0.4rem, 1vw, 0.5rem) clamp(0.8rem, 1.5vw, 1rem) !important;
+    border-radius: 25px;
+    font-family: var(--font-body, sans-serif);
+    font-size: clamp(0.55rem, 0.8vw, 0.65rem) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    white-space: nowrap !important;
+    transform: rotate(-1deg);
+    background: linear-gradient(135deg, rgba(212, 184, 150, 0.25) 0%, rgba(212, 184, 150, 0.15) 100%);
+    color: var(--color-accent-primary, #d4b896);
+    border: 2px solid rgba(212, 184, 150, 0.4);
+    box-shadow: 
+        0 4px 12px rgba(212, 184, 150, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.certifications-side .cert-status::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border: 1px dashed rgba(212, 184, 150, 0.3);
+    border-radius: 25px;
+    z-index: -1;
+}
+
+/* Hover certifications - seulement sur desktop */
+@media (hover: hover) {
+    .certification-badge:hover {
+        transform: translateY(-10px) scale(1.05);
+        border-color: rgba(245, 245, 220, 0.3);
+        box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.5),
+            0 10px 30px rgba(212, 184, 150, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .certification-badge:hover .cert-icon {
+        background: linear-gradient(135deg, rgba(245, 245, 220, 0.3) 0%, rgba(245, 245, 220, 0.2) 100%);
+        border-color: rgba(245, 245, 220, 0.4);
+        transform: scale(1.1);
+        box-shadow: 
+            0 12px 25px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .certification-badge:hover .cert-status.obtained {
+        background: linear-gradient(135deg, rgba(212, 184, 150, 0.35) 0%, rgba(212, 184, 150, 0.25) 100%);
+        border-color: rgba(212, 184, 150, 0.6);
+    }
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
+
+/* Extra large screens */
+@media (min-width: 1400px) {
+    :root {
+        --formations-offset: -8rem;
+        --certifications-offset-x: -3rem;
+        --certifications-offset-y: 8rem;
+        --divider-offset: -5rem;
+    }
+}
+
+/* Large screens */
+@media (max-width: 1200px) {
+    :root {
+        --formations-offset: -4rem;
+        --certifications-offset-x: -1rem;
+        --certifications-offset-y: 4rem;
+        --divider-offset: -2rem;
+    }
+    
+    .fusion-container {
+        grid-template-columns: 1.2fr 1px 0.8fr;
+        gap: 2.5rem;
+        padding: 0 1.5rem;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1024px) {
+    :root {
+        --formations-offset: -2rem;
+        --certifications-offset-x: 0rem;
+        --certifications-offset-y: 2rem;
+        --divider-offset: -1rem;
+    }
+    
+    .fusion-container {
+        grid-template-columns: 1fr 1px 1fr;
+        gap: 2rem;
+        padding: 0 1.5rem;
+    }
+    
+    .formations-side .formation-card {
+        width: clamp(200px, 20vw, 240px) !important;
+        min-height: clamp(180px, 18vw, 200px) !important;
+    }
+}
+
+/* Tablet portrait */
+@media (max-width: 900px) {
+    :root {
+        --formations-offset: 0rem;
+        --certifications-offset-x: 0rem;
+        --certifications-offset-y: 0rem;
+        --divider-offset: 0rem;
+    }
+    
+    .fusion-container {
+        display: block !important;
+        padding: 0 1.5rem !important;
+        gap: 0 !important;
+    }
+    
+    .fusion-divider {
+        display: none !important;
+    }
+    
+    .formations-side {
+        margin-bottom: 5rem !important;
+    }
+    
+    .formations-side .formations-title,
+    .certifications-side .certifications-title {
+        font-size: clamp(2.5rem, 8vw, 4rem) !important;
+        text-align: center !important;
+        margin-bottom: 2.5rem !important;
+    }
+    
+    .formations-side .formations-container {
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center !important;
+    }
+    
+    .formations-side .formation-card {
+        width: 100% !important;
+        max-width: 400px !important;
+        aspect-ratio: 3/2 !important;
+        min-height: 180px !important;
+        padding: 1.5rem !important;
+    }
+    
+    .certifications-side .certifications-collection {
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center !important;
+    }
+    
+    .certifications-side .certification-badge {
+        aspect-ratio: 3/2 !important;
+        padding: 1.5rem !important;
+        width: 100% !important;
+        max-width: 400px !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .formations-certifications-fusion {
+        padding: 4rem 0 6rem 0;
+    }
+    
+    .fusion-container {
+        padding: 0 1rem !important;
+    }
+    
+    .formations-side .formations-title,
+    .certifications-side .certifications-title {
+        font-size: clamp(2rem, 12vw, 3rem) !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    .formations-side .formations-container {
+        gap: 1.5rem !important;
+    }
+    
+    .certifications-side .certifications-collection {
+        gap: 1.5rem !important;
+    }
+    
+    .formations-side .formation-card,
+    .certifications-side .certification-badge {
+        padding: 1.2rem !important;
+        min-height: 160px !important;
+        max-width: none !important;
+    }
+    
+    .certifications-side .cert-icon {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    .cert-seal {
+        font-size: 1.2rem !important;
+    }
+    
+    .certifications-side .badge-number {
+        width: 20px !important;
+        height: 20px !important;
+        font-size: 0.5rem !important;
+    }
+}
+
+/* Very small mobile */
+@media (max-width: 400px) {
+    .formations-side .formations-container {
+        gap: 1rem !important;
+    }
+    
+    .certifications-side .certifications-collection {
+        gap: 1rem !important;
+    }
+    
+    .formations-side .formation-card,
+    .certifications-side .certification-badge {
+        padding: 1rem !important;
+        min-height: 140px !important;
+    }
+}
+
+/* Landscape mobile - adjustments spécifiques */
+@media (max-height: 500px) and (orientation: landscape) {
+    .formations-certifications-fusion {
+        padding: 2rem 0 4rem 0;
+    }
+    
+    .formations-side {
+        margin-bottom: 3rem !important;
+    }
+    
+    .formations-side .formations-title,
+    .certifications-side .certifications-title {
+        font-size: clamp(1.8rem, 8vw, 3rem) !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .formations-side .formation-card,
+    .certifications-side .certification-badge {
+        min-height: 120px !important;
+        aspect-ratio: 5/3 !important;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITÉ ET RÉDUCTION MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .certification-badge {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .formation-card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .divider-line {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+}
+
+.certification-badge:focus {
+    outline: 2px solid rgba(212, 184, 150, 0.5);
+    outline-offset: 3px;
+}
+
+.formation-card:focus {
+    outline: 2px solid rgba(212, 184, 150, 0.5);
+    outline-offset: 3px;
+}
+
+/* ========================================
+   CORRECTIONS SUPPLÉMENTAIRES POUR MOBILE
+   ======================================== */
+
+/* Assure que le contenu ne déborde pas */
+@media (max-width: 768px) {
+    .formations-side,
+    .certifications-side {
+        overflow: hidden;
+    }
+    
+    .formations-side .formation-card,
+    .certifications-side .certification-badge {
+        width: calc(100% - 0rem) !important;
+        margin: 0 auto;
+    }
+    
+    /* Désactive tous les transforms problématiques sur mobile */
+    .formations-side,
+    .certifications-side,
+    .fusion-divider {
+        transform: none !important;
+    }
+}
