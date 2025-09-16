@@ -89,10 +89,10 @@
     left: 0 !important;
     margin-bottom: 2.5rem !important;
     font-size: clamp(3rem, 5vw, 5rem) !important;
-    text-align: left !important;
+    text-align: center !important; /* Changé de left à center */
     transform: none !important;
-    width: auto !important;
-    align-self: flex-start !important;
+    width: 100% !important; /* Assure que le titre prend toute la largeur */
+    align-self: center !important; /* Changé de flex-start à center */
     font-family: 'Gloock', serif;
     font-weight: 800;
     color: transparent;
